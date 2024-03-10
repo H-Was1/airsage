@@ -1,7 +1,8 @@
+"use server";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { HammerIcon } from "lucide-react";
+import { Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -12,9 +13,9 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-function Navbar() {
+async function Navbar() {
   return (
-    <main className="sm:px-[10rem] px-[1rem] sticky top-0 backdrop-blur-md h-[90px] z-40">
+    <main className="md:px-[10rem] px-[6rem] sticky top-0 backdrop-blur-md h-[90px] z-40">
       <ul className="flex items-center justify-between gap-12 list-none py-2 sm:py-4 border-b border-slate-50/10">
         <Link href={"/"} className="max-w-[8rem]">
           <Image
@@ -32,7 +33,9 @@ function Navbar() {
         </li>
         <li className="md:hidden text-zinc-50">
           <Sheet>
-            <SheetTrigger>Open</SheetTrigger>
+            <SheetTrigger asChild>
+              <Menu />
+            </SheetTrigger>
             <SheetContent className="bg-slate-800/20 backdrop-blur-md text-zinc-50 !border-none w-[16rem]">
               <SheetHeader>
                 <div className="flex flex-col gap-12 mt-16">
