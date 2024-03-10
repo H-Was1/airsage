@@ -1,3 +1,4 @@
+import { Link } from "lucide-react";
 import React from "react";
 
 function About() {
@@ -15,9 +16,9 @@ function About() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
                   fill="#34AC90"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -30,7 +31,7 @@ function About() {
                   <line x1="7" y1="17" x2="17" y2="7"></line>
                   <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
-              </a>
+              </Link>
             </span>
           </h4>
           <p className="mt-2 opacity-40 md:mt-3">
