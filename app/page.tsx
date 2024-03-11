@@ -64,8 +64,8 @@ export default async function Home() {
             </h1>
             <p>How Our App Revolutionizes Your Well-being ?</p>
           </div>
-          <div className="grid grid-cols-12 grid-rows-12 md:min-h-screen gap-4">
-            <div className="max-md:row-start-1 max-md:row-end-4 max-md:col-span-12 rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-1 row-end-5 col-span-6 flex flex-col justify-center px-6 group gap-8">
+          <div className="feature-grid md:grid-cols-12 md:grid-rows-12 grid-cols-1 md:min-h-screen gap-4">
+            <div className="grid-acc rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-1 row-end-5 col-span-6 flex flex-col justify-center px-6 group gap-8">
               <div className="text-rose-600 flex items-center justify-center gap-2 transition-transform">
                 <h1 className="text-3xl font-semibold">Accuracy</h1>
                 <span className="translate-y-6 scale-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-150 group-hover:transition-transform duration-200">
@@ -185,7 +185,7 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-            <div className="max-md:row-start-4 max-md:row-end-7  max-md:col-span-12 rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-1 row-end-5 col-span-6 group flex flex-col justify-center px-6 py-4 gap-4">
+            <div className="grid-time rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-1 row-end-5 col-span-6 group flex flex-col justify-center px-6 py-4 gap-4">
               <div className="text-rose-600 flex items-center justify-center gap-2 transition-transform">
                 <h1 className="text-3xl font-semibold">Timely Updates</h1>
                 <span className="translate-y-6 scale-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-150 group-hover:transition-transform duration-200">
@@ -231,7 +231,7 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-            <div className="max-md:row-start-7 max-md:row-end-10 max-md:col-span-12 rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-5 row-end-13 col-span-8 group flex flex-col items-center gap-6 justify-center px-4 py-3 h-auto">
+            <div className="grid-impact rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-5 row-end-13 col-span-8 group flex flex-col items-center gap-6 justify-center px-4 py-3">
               <div className="text-rose-600 flex items-center justify-center gap-4 transition-transform">
                 <h1 className="text-3xl font-semibold">Impact on Health</h1>
                 <span className="translate-y-6 scale-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-150 group-hover:transition-transform duration-200">
@@ -261,7 +261,7 @@ export default async function Home() {
               </p>
               <TabComp />
             </div>
-            <div className="max-md:row-start-10 max-md:row-end-13 max-md:col-span-12 rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-5 row-end-13 col-span-4 h-auto overflow-hidden px-4 group">
+            <div className="grid-view rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-5 row-end-13 col-span-4 h-auto overflow-hidden px-4 group">
               <View />
             </div>
           </div>
