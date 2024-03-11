@@ -150,3 +150,14 @@ export async function extractWeather(data: string) {
   };
   return weatherData;
 }
+
+export async function extracta(data: string) {
+  const $ = cheerio.load(data);
+  const texts: string[] = [];
+
+  $("div.locations-list.content-module > a").each((index, element) => {
+    texts.push($(element).text().trim().split("\n")[1].trim());
+  });
+
+  return texts;
+}

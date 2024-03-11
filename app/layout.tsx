@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import local from "next/font/local";
 import "./globals.css";
 
+
 const font = local({ src: "./fonts/Exo2-VariableFont_wght.ttf" });
 
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.className} custom-scrollbar bg-black`}>
+      <body
+        className={`${font.className} custom-scrollbar bg-black text-zinc-50`}
+      >
         {children}
       </body>
     </html>

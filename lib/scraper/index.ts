@@ -1,8 +1,9 @@
 "use server";
 import page from "@/app/page";
 import { request } from "http";
-import { extractAqi, extractWeather } from "../extractdata";
+import { extractAqi, extractWeather, extracta } from "../extractdata";
 const args = [
+  "--incognito",
   "--aggressive-cache-discard",
   "--disable-cache",
   "--disable-application-cache",
@@ -24,6 +25,7 @@ const blockedUrls = [
   "https://securepubads.g.doubleclick.net/gampad/adx",
   "https://tlx.3lift.com/header/auction",
   "https://www.accuweather.com/akam/13/7efb0628",
+  "https://tpc.googlesyndication.com/pagead/js/",
 ];
 const puppeteerExtra = require("puppeteer-extra");
 const Stealth = require("puppeteer-extra-plugin-stealth");
@@ -46,7 +48,7 @@ export const scrapeWeather = async (weatherUrl: string) => {
     args,
   });
   try {
-    const Page = await browser.newPage();
+    const Page = (await browser.pages())[0];
     await Page.setGeolocation(presets.geo);
     await Page.setUserAgent(presets.useragents);
     await Page.setDefaultNavigationTimeout(0);
@@ -83,40 +85,42 @@ export const scrapeWeather = async (weatherUrl: string) => {
     console.error(error);
   }
 };
-export const findCity = async () => {
-  const browser = await puppeteerExtra.launch({
-    headless: false,
-    args,
-  });
+export const findCity = async (query: string) => {
   try {
-    const Page = await browser.newPage();
+    const browser = await puppeteerExtra.launch({
+      headless: false,
+      args,
+    });
+    const Page = (await browser.pages())[0];
     await Page.setGeolocation(presets.geo);
     await Page.setUserAgent(presets.useragents);
     await Page.setDefaultNavigationTimeout(0);
-    // await Page.setRequestInterception(true);
-    // Page.on("request", (req: any) => {
-    //   const requestUrl = req.url();
-    //   if (
-    //     req.resourceType() == "stylesheet" ||
-    //     req.resourceType() == "font" ||
-    //     req.resourceType() == "image" ||
-    //     blockedUrls.some((url) => requestUrl.includes(url))
-    //   ) {
-    //     req.abort();
-    //   } else {
-    //     req.continue();
-    //   }
-    // });
+    await Page.setRequestInterception(true);
+    Page.on("request", (req: any) => {
+      const requestUrl = req.url();
+      if (
+        req.resourceType() == "stylesheet" ||
+        req.resourceType() == "font" ||
+        req.resourceType() == "image" ||
+        blockedUrls.some((url) => requestUrl.includes(url))
+      ) {
+        req.abort();
+      } else {
+        req.continue();
+      }
+    });
     await Page.goto("https://www.accuweather.com/");
     await Page.waitForSelector(".search-input");
-    await Page.type(
-      ".search-input",
-      "lahore"
-    );
+    await Page.type(".search-input", query);
     await Page.keyboard.press("Enter");
-    await browser.close();
+    await Page.waitForNavigation();
+    // await Page.screenshot({ path: "screenshot.png" });
+    await Page.waitForSelector(".locations-list.content-module");
     const WeatherContent = await Page.content();
-    console.log(WeatherContent);
+    const data = await extracta(WeatherContent);
+    console.log(data);
+
+    await browser.close();
   } catch (error) {
     console.error(error);
   }

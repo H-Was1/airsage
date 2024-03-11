@@ -15,9 +15,9 @@ import {
 
 async function Navbar() {
   return (
-    <main className="md:px-[10rem] px-[6rem] sticky top-0 backdrop-blur-md h-[90px] z-40">
+    <main className="md:px-[10rem] px-[6rem] max-sm:px-[2rem] sticky top-0 backdrop-blur-md ,md:h-[90px] z-40">
       <ul className="flex items-center justify-between gap-12 list-none py-2 sm:py-4 border-b border-slate-50/10">
-        <Link href={"/"} className="max-w-[8rem]">
+        <Link href={"/"} className="max-w-[8rem]" title="Go To HomePage">
           <Image
             src={"/airsage.svg"}
             width={120}

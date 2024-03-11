@@ -27,8 +27,8 @@ function Hero() {
           className={`bg-gradient-to-r from-20% blur-3xl ${gradientsb[hover]} h-[60%] w-[70%]`}
         ></div>
       </div>
-      <main className="backdrop-blur-3xl h-screen lg:px-[10rem]">
-        <div className="mx-auto max-w-screen px-6 md:px-10 pt-16">
+      <main className="backdrop-blur-3xl min-h-screen lg:px-[10rem]">
+        <div className="mx-auto max-w-screen px-6 md:px-10 pt-16 py-1">
           <h1
             className={`flex flex-col gap-1 transition font-display text-6xl font-bold leading-none md:text-[7rem] bg-gradient-to-r from-20% bg-clip-text text-transparent ${gradients[hover]} text-center`}
           >
