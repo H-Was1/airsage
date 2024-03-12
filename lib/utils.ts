@@ -41,39 +41,39 @@ export interface CityProps {
   longName: string;
   weatherUrl: string;
   weatherData?: {
-     tonight: string;
-     tomorrow: string;
-     today: string;
-     wind: string;
-     collectionTime: string;
-     current: {
-       temperature: string;
-       weather: string;
-     };
+    tonight: string;
+    tomorrow: string;
+    today: string;
+    wind: string;
+    collectionTime: string;
+    current: {
+      temperature: string;
+      weather: string;
+    };
   };
   aqiData?: {
-     quality: {
-       scale: string;
-       index: string;
-       description: string;
-     };
-     pollutants: {
-       pm10: {
-         value: string;
-         conclusion: string;
-       };
-       pm25: {
-         value: string;
-         conclusion: string;
-       };
-       no2: {
-         value: string;
-         conclusion: string;
-       };
-       o3: {
-         value: string;
-         conclusion: string;
-       };
-     };
+    quality: {
+      scale: string;
+      index: string;
+      description: string;
+    };
+    pollutants: {
+      no2: {
+        value: String,
+        conclusion: String,
+      },
+      pm25: {
+        value: String,
+        conclusion: String,
+      },
+      pm10: {
+        value: String,
+        conclusion: String,
+      },
+      o3: {
+        value: String,
+        conclusion: String,
+      },
+    };
   };
- }
+}

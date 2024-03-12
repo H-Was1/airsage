@@ -65,12 +65,12 @@ export const scrapeWeather = async (url: string) => {
     const AQIContent = await Page.content();
     await browser.close();
     console.log("closed");
-    const WeatherData = await extractWeather(WeatherContent);
-    const AQIData = await extractAqi(AQIContent);
+    const weatherData = await extractWeather(WeatherContent);
+    const aqiData = await extractAqi(AQIContent);
 
     return {
-      WeatherData,
-      AQIData,
+      weatherData,
+      aqiData,
     };
   } catch (error) {
     console.error("scraping weather + aqi" + error);

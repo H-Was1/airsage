@@ -45,7 +45,7 @@ export async function updateAll() {
 
       await City.findByIdAndUpdate(
         { _id: city._id },
-        { $set: { aqiData: data?.AQIData, weatherData: data?.WeatherData } }
+        { $set: { aqiData: data?.aqiData, weatherData: data?.weatherData } }
       );
     }
     return 1;
@@ -108,18 +108,21 @@ export async function manageNewLocation({
   longName: string;
   index: number;
 }) {
-  const scrapedData = await scrapeWeather(url);
-  const finalData = {
-    name,
-    longName,
-    weatherUrl: url,
-    weatherData: scrapedData?.WeatherData,
-    aqiData: scrapedData?.AQIData,
-    ...scrapedData,
-  };
-  const existing = getCityByUrl(finalData.weatherUrl);
-  if (!existing) return;
-  await addOne(finalData);
+  try {
+    const scrapedData = await scrapeWeather(url);
+    const finalData = {
+      name,
+      longName,
+      weatherUrl: url,
+      ...scrapedData,
+    };
+    const existing = getCityByUrl(finalData.weatherUrl);
+    if (!existing) return;
+    await addOne(finalData);
+  } catch (error) {
+    console.error("managing location: " + error);
+    throw error;
+  }
 }
 
 export async function addOne(data: CityProps) {
