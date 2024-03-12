@@ -1,6 +1,6 @@
 # AirSage
 
-AirSage is a modern, appealing website designed to provide users with data and weather updates. It features a glassmorphism design with gradients, offering a modern look that is both visually appealing and functional.
+AirSage is a modern, appealing website designed to provide users with AQI data and weather updates. It features a glassmorphism design with gradients, offering a modern look that is both visually appealing and functional.
 
 ## Features
 
