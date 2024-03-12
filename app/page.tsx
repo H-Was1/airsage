@@ -25,26 +25,26 @@ export default async function Home() {
             <div className="bg-emerald-500 h-[40%] w-[70%]"></div>
           </div>
           <div className="absolute top-0 -translate-y-7">
-            <p className="select-none text-yellow-600/50 lg:text-[9rem] text-7xl max-sm:text-5xl">
+            <p className="select-none text-yellow-600/50 lg:text-[9rem] text-7xl max-sm:text-4xl">
               Global Insights
             </p>
           </div>
           <div className="relative -z-10 flex flex-col justify-center items-center">
-            <div className="bg-slate-50/10 backdrop-blur-sm rounded-3xl h-[8rem] w-auto absolute bottom-7 flex items-center justify-between px-4 gap-8 text-rose-500 sm:text-3xl">
-              <div className="flex flex-col items-center justify-center gap-4">
-                <h1 className="text-4xl max-sm:text-2xl font-bold tracking-wider">
+            <div className="bg-slate-50/10 backdrop-blur-sm rounded-3xl h-[8rem] w-auto absolute bottom-9 flex items-center justify-between px-4 gap-8 text-rose-500 sm:text-3xl">
+              <div className="flex flex-col items-center justify-center sm:gap-4">
+                <h1 className="text-4xl max-sm:text-lg font-bold sm:tracking-wider">
                   &gt;30M
                 </h1>
                 <p>FORECASTS</p>
               </div>
               <div className="flex flex-col items-center justify-center gap-4">
-                <h1 className="text-4xl max-sm:text-2xl font-bold tracking-wider">
+                <h1 className="text-4xl max-sm:text-lg font-bold sm:tracking-wider">
                   &gt;1,108
                 </h1>
                 <p>LOCATIONS</p>
               </div>
               <div className="flex flex-col items-center justify-center gap-4">
-                <h1 className="text-4xl max-sm:text-2xl font-bold tracking-wider">
+                <h1 className="text-4xl max-sm:text-lg font-bold sm:tracking-wider">
                   &gt;99.99%
                 </h1>
                 <p>UPTIME</p>
@@ -195,16 +195,18 @@ export default async function Home() {
             <div className="bg-emerald-500 h-full w-full"></div>
           </div>
           {cities.length >= 1 ? (
-            <div className="city-grid gap-3 pb-6 border-b border-emerald-500/20">
+            <div className="city-grid gap-3 pb-6 border-b border-emerald-50/20">
               {cities.map((c, i) => (
                 <Link
                   key={i}
                   href={`/${c.name.replace(" ", "-")}`}
                   className="bg-zinc-50/10 group hover:bg-zinc-50/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
                 >
-                  <h1 className="text-3xl text-rose-500 font-semibold">{c.name}</h1>
+                  <h1 className="text-3xl text-rose-500 font-semibold">
+                    {c.name}
+                  </h1>
                   <p className="text-yellow-500">{c.longName}</p>
-                  <div className="flex gap-2 flex-wrap">
+                  <div className="flex gap-2 items-center justify-center flex-wrap">
                     <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
                       Weather
                     </span>

@@ -9,7 +9,7 @@ function Footer() {
       <Link href={"/"} className="max-w-[8rem]">
         <Image src={"/airsage.svg"} width={130} height={40} alt="logo"></Image>
       </Link>
-      <p className="flex items-center justify-center px-4 py-2 bg-emerald-500/20 rounded-xl text-2xl">
+      <p className="flex items-center justify-center px-4 py-2 bg-emerald-500/20 rounded-xl text-lg sm:text-xl">
         Built with
         <span>
           <HeartPulse className="stroke-rose-700 mx-1.5" />
@@ -19,7 +19,7 @@ function Footer() {
           href={"https://hammad-wasi.vercel.app/"}
           className="ml-1.5 hover:scale-105 hover:-translate-y-1/20 hover:shadow-lg shadow-white"
         >
-          Hammad <span className="text-sky-500">Wasi</span>
+          Hammad <span className="text-rose-500">Wasi</span>
         </Link>
       </p>
     </footer>
