@@ -6,22 +6,13 @@ import TabComp from "./_frags/tab";
 import Footer from "./_frags/footer";
 import View from "./_frags/view";
 import connectToDB from "@/lib/mongoose";
-import { manageNewLocation } from "@/lib/actions";
+import { getAllCities } from "@/lib/actions";
 import { url } from "inspector";
+import AccuracyComp from "./_frags/accuracycomp";
+import Link from "next/link";
 
 export default async function Home() {
-  (async function () {
-    // const locations = await findCity("karachi");
-    // const newLocation = locations[3];
-    // console.log(newLocation);
-
-    await manageNewLocation({
-      name: "Butt Karachi",
-      longName: "Lahore, PB PAK",
-      url: "https://www.accuweather.com/web-api/three-day-redirect?key=GEO_74%2E324%2c31%2E567&postalCode=&target=",
-      index: 3,
-    });
-  })();
+  const cities = await getAllCities();
   return (
     <>
       <Navbar />
@@ -107,98 +98,7 @@ export default async function Home() {
                 delivered straight to your inbox, powered by our advanced web
                 scraping technology.
               </p>
-              <div className="flex justify-between gap-1 max-md:w-full max-md:px-6 max-md:pb-3">
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="flex h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-                <div className="h-10 w-[8px] items-end rounded-full bg-black/20 md:h-16 hidden md:flex">
-                  <span className="h-4 w-full rounded-full bg-emerald-400"></span>
-                </div>
-              </div>
+              <AccuracyComp />
             </div>
             <div className="grid-time rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-1 row-end-5 col-span-6 group flex flex-col justify-center px-6 py-4 gap-4">
               <div className="text-rose-600 flex items-center justify-center gap-2 transition-transform">
@@ -280,6 +180,32 @@ export default async function Home() {
               <View />
             </div>
           </div>
+        </section>
+        <section className="lg:px-[10rem] px-8 pt-5 pb-2 min-h-[60vh]">
+          <div></div>
+          {cities.length >= 1 ? (
+            <div className="city-grid gap-3">
+              {cities.map((c, i) => (
+                <Link
+                  key={i}
+                  href={`/${c.name.replace(" ", "-")}`}
+                  className="bg-red-500 rounded-2xl col-span-1 row-span-1"
+                ></Link>
+              ))}
+            </div>
+          ) : (
+            <div className="w-full h-[40vh] flex flex-col gap-3 items-center justify-center">
+              <h1 className="md:text-5xl text-rose-500 max-md:text-3xl">
+                No Location is available right now
+              </h1>
+              <Link
+                href={"/locations"}
+                className="bg-yellow-500 px-3 py-2 rounded-xl text-black"
+              >
+                Add a Location
+              </Link>
+            </div>
+          )}
         </section>
         <Footer />
       </main>

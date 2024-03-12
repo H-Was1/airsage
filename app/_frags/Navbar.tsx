@@ -26,7 +26,7 @@ async function Navbar() {
           ></Image>
         </Link>
         <li className="text-zinc-50 max-md:hidden flex items-center justify-between gap-8 w-auto">
-          <Link href={"/cities"}>Cities</Link>
+          <Link href={"/locations"}>Locations</Link>
           <Link href={"/weather"}>Weather</Link>
           <Link href={"/aqi"}>AQI</Link>
           <Link href={"/subscribe"}>Subscribe</Link>
@@ -40,7 +40,7 @@ async function Navbar() {
               <SheetHeader>
                 <div className="flex flex-col gap-12 mt-16">
                   <SheetClose>
-                    <Link href={"/cities"}>Cities</Link>
+                    <Link href={"/locations"}>Locations</Link>
                   </SheetClose>
                   <SheetClose>
                     <Link href={"/weather"}>Weather</Link>

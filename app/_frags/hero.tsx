@@ -118,7 +118,7 @@ function Hero() {
               onMouseLeave={() => setHover(0)}
               className="group relative flex flex-col items-center p-6 md:p-8 cursor-default bg-white/5 backdrop-blur transition rounded-lg xl:first:!rounded-l-[3rem] text-zinc-50 xl:last:!rounded-r-[3rem] hover:scale-[1.02] hover:bg-white/10"
             >
-              <Link className="absolute inset-0 z-10" href="/cities"></Link>
+              <Link className="absolute inset-0 z-10" href="/locations"></Link>
               <h3 className="flex items-center gap-1 text-zinc-50 font-display text-xl font-medium leading-none md:text-2xl">
                 <span>Global</span>
                 <span className="ml-0.5 rounded bg-orange-500 px-1.5 py-1 text-xs font-semibold leading-none tracking-wide">
@@ -131,7 +131,7 @@ function Hero() {
               <Link
                 target="_blank"
                 className="group-hover:bg-orange-500 group-hover:text-zinc-50 cursor-pointer items-center transition gap-1 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full hover:bg-emerald-400 hover:text-emerald-950 disabled:bg-white/5 disabled:text-zinc-50 mt-4 hidden md:inline-flex bg-zinc-50 text-zinc-950"
-                href="/cities"
+                href="/locations"
               >
                 <span>Check Any City</span>
                 <svg
