@@ -1,7 +1,7 @@
 "use server";
-import page from "@/app/page";
-import { request } from "http";
-import { extractAqi, extractWeather, extracta } from "../extractdata";
+import { extractAqi, extractWeather, extractNames } from "../extractdata";
+import { getCityByUrl } from "../actions";
+
 const args = [
   "--incognito",
   "--aggressive-cache-discard",
@@ -12,24 +12,16 @@ const args = [
   "--media-cache-size=0",
   "--disk-cache-size=0",
   "--disable-notifications",
+  "--no-sandbox",
+  "--disable-setuid-sandbox",
+  "--ignore-certificate-errors",
+  '--proxy-server="direct://"',
+  "--proxy-bypass-list=*",
 ];
-const blockedUrls = [
-  "https://accuweather-com.videoplayerhub.com/btTag.js",
-  "https://cdn.p-n.io/pushly-sdk.min.js",
-  "https://fastlane.rubiconproject.com/a/api/fastlane.json",
-  "https://hbopenbid.pubmatic.com/translator",
-  "https://htlb.casalemedia.com/openrtb/pbjs",
-  "https://ib.adnxs.com/ut/v3/prebid",
-  "https://s.go-mpulse.net/boomerang/WVCM2-8MB3H-J4PHA-TKSJD-9YGAB",
-  "https://sb.scorecardresearch.com/p",
-  "https://securepubads.g.doubleclick.net/gampad/adx",
-  "https://tlx.3lift.com/header/auction",
-  "https://www.accuweather.com/akam/13/7efb0628",
-  "https://tpc.googlesyndication.com/pagead/js/",
-];
-const puppeteerExtra = require("puppeteer-extra");
-const Stealth = require("puppeteer-extra-plugin-stealth");
-puppeteerExtra.use(Stealth());
+
+import puppeteer from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import Adblocker from "puppeteer-extra-plugin-adblocker";
 
 const presets = {
   viewport: {
@@ -41,10 +33,10 @@ const presets = {
   useragents:
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
 };
-
-export const scrapeWeather = async (weatherUrl: string) => {
-  const browser = await puppeteerExtra.launch({
-    headless: false,
+export const scrapeWeather = async (url: string) => {
+  await puppeteer.use(Adblocker({ blockTrackers: true }));
+  const browser = await puppeteer.use(StealthPlugin()).launch({
+    // headless: false,
     args,
   });
   try {
@@ -58,8 +50,7 @@ export const scrapeWeather = async (weatherUrl: string) => {
       if (
         req.resourceType() == "stylesheet" ||
         req.resourceType() == "font" ||
-        req.resourceType() == "image" ||
-        blockedUrls.some((url) => requestUrl.includes(url))
+        req.resourceType() == "image"
       ) {
         req.abort();
       } else {
@@ -67,13 +58,13 @@ export const scrapeWeather = async (weatherUrl: string) => {
       }
     });
 
-    await Page.goto(weatherUrl);
+    await Page.goto(url);
     const WeatherContent = await Page.content();
-    await Page.goto(
-      weatherUrl.replace("weather-forecast", "air-quality-index")
-    );
+    const aqiUrl = await Page.url();
+    await Page.goto(aqiUrl.replace("weather-forecast", "air-quality-index"));
     const AQIContent = await Page.content();
     await browser.close();
+    console.log("closed");
     const WeatherData = await extractWeather(WeatherContent);
     const AQIData = await extractAqi(AQIContent);
 
@@ -82,15 +73,16 @@ export const scrapeWeather = async (weatherUrl: string) => {
       AQIData,
     };
   } catch (error) {
-    console.error(error);
+    console.error("scraping weather + aqi" + error);
   }
 };
 export const findCity = async (query: string) => {
+  await puppeteer.use(Adblocker({ blockTrackers: true }));
+  const browser = await puppeteer.use(StealthPlugin()).launch({
+    // headless: false,
+    args,
+  });
   try {
-    const browser = await puppeteerExtra.launch({
-      headless: false,
-      args,
-    });
     const Page = (await browser.pages())[0];
     await Page.setGeolocation(presets.geo);
     await Page.setUserAgent(presets.useragents);
@@ -99,29 +91,28 @@ export const findCity = async (query: string) => {
     Page.on("request", (req: any) => {
       const requestUrl = req.url();
       if (
-        req.resourceType() == "stylesheet" ||
+        // req.resourceType() == "stylesheet" ||
         req.resourceType() == "font" ||
-        req.resourceType() == "image" ||
-        blockedUrls.some((url) => requestUrl.includes(url))
+        req.resourceType() == "image"
       ) {
         req.abort();
       } else {
         req.continue();
       }
     });
-    await Page.goto("https://www.accuweather.com/");
-    await Page.waitForSelector(".search-input");
-    await Page.type(".search-input", query);
-    await Page.keyboard.press("Enter");
-    await Page.waitForNavigation();
-    // await Page.screenshot({ path: "screenshot.png" });
-    await Page.waitForSelector(".locations-list.content-module");
-    const WeatherContent = await Page.content();
-    const data = await extracta(WeatherContent);
-    console.log(data);
-
+    await Page.goto(
+      `https://www.accuweather.com/en/search-locations?query=${
+        query.includes(" ") ? query.split(" ").join("+") : query
+      }`
+    );
+    await Page.waitForSelector(".search-results-heading");
+    const content = await Page.content();
     await browser.close();
+    console.log("closed");
+
+    const data = await extractNames(content);
+    return data;
   } catch (error) {
-    console.error(error);
+    console.error("Finding City name" + error);
   }
 };

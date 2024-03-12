@@ -5,8 +5,23 @@ import Image from "next/image";
 import TabComp from "./_frags/tab";
 import Footer from "./_frags/footer";
 import View from "./_frags/view";
+import connectToDB from "@/lib/mongoose";
+import { manageNewLocation } from "@/lib/actions";
+import { url } from "inspector";
 
 export default async function Home() {
+  (async function () {
+    // const locations = await findCity("karachi");
+    // const newLocation = locations[3];
+    // console.log(newLocation);
+
+    await manageNewLocation({
+      name: "Butt Karachi",
+      longName: "Lahore, PB PAK",
+      url: "https://www.accuweather.com/web-api/three-day-redirect?key=GEO_74%2E324%2c31%2E567&postalCode=&target=",
+      index: 3,
+    });
+  })();
   return (
     <>
       <Navbar />
@@ -71,9 +86,9 @@ export default async function Home() {
                 <span className="translate-y-6 scale-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-150 group-hover:transition-transform duration-200">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -191,9 +206,9 @@ export default async function Home() {
                 <span className="translate-y-6 scale-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-150 group-hover:transition-transform duration-200">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -231,15 +246,15 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-            <div className="grid-impact rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-5 row-end-13 col-span-8 group flex flex-col items-center gap-6 justify-center px-4 py-3">
+            <div className="grid-impact rounded-[3rem] backdrop-blur-xl bg-slate-50/10 row-start-5 row-end-13 col-span-8 group flex flex-col items-center gap-6 justify-center px-4 py-6">
               <div className="text-rose-600 flex items-center justify-center gap-4 transition-transform">
                 <h1 className="text-3xl font-semibold">Impact on Health</h1>
                 <span className="translate-y-6 scale-0 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-150 group-hover:transition-transform duration-200">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

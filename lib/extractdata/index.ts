@@ -87,10 +87,10 @@ export async function extractAqi(data: string) {
 
   //
 
-  const aqiData = {
+  return {
     quality: {
       scale: $scale,
-      index: $index.match(/\d+/)?.[0],
+      index: ($index.match(/\d+/)?.[0] as string) || "",
       description: $description,
     },
     pollutants: {
@@ -110,16 +110,16 @@ export async function extractAqi(data: string) {
         conclusion: $no2conclusion,
       },
       o3: {
-        value: $o3Value,
-
-        conclusion: $o3conclusion,
+        value: $o3Value as string,
+        conclusion: $o3conclusion as string,
       },
     },
   };
-  return aqiData;
 }
 export async function extractWeather(data: string) {
   const $ = cheerio.load(data);
+  const $collectionTime = $(weatherDataSelectors.collectionTime).text().trim();
+
   const $today = $(weatherDataSelectors.today)
     .text()
     .replace(/\t/g, "")
@@ -132,32 +132,69 @@ export async function extractWeather(data: string) {
     .replace(/\n/g, "")
     .replace(/Lo.*$/, "")
     .replace(/Hi.*$/, "")
+    .replace("Tomorrow:", "")
     .replace("Tonight:", "");
 
   const $temperature = $(weatherDataSelectors.current.temperature).text();
   const $weather = $(weatherDataSelectors.current.weather).text();
   const $wind = $(weatherDataSelectors.wind).text();
-  const $collectionTime = $(weatherDataSelectors.collectionTime).text().trim();
-  const weatherData = {
-    today: $today,
-    tonight: $tonight,
-    current: {
-      temperature: $temperature,
-      weather: $weather,
-    },
-    wind: $wind,
-    collectionTime: $collectionTime,
-  };
-  return weatherData;
+  if ($collectionTime.includes("PM")) {
+    return {
+      tonight: $today,
+      tomorrow: $tonight,
+      today: "",
+      current: {
+        temperature: $temperature,
+        weather: $weather,
+      },
+      wind: $wind,
+      collectionTime: $collectionTime,
+    };
+  } else {
+    return {
+      today: $today,
+      tonight: $tonight,
+      tomorrow: "",
+      current: {
+        temperature: $temperature,
+        weather: $weather,
+      },
+      wind: $wind,
+      collectionTime: $collectionTime,
+    };
+  }
 }
 
-export async function extracta(data: string) {
+export async function extractNames(data: string) {
   const $ = cheerio.load(data);
-  const texts: string[] = [];
+  const locations: Array<{
+    name: string;
+    longName: string;
+    url: string;
+    index: number;
+  } | null> = [];
 
-  $("div.locations-list.content-module > a").each((index, element) => {
-    texts.push($(element).text().trim().split("\n")[1].trim());
+  // Select the elements containing the location names
+  $(".locations-list a").each((index, element) => {
+    // Extract the short and long names
+    const name = $(element).find(".location-name").text();
+    const longName = $(element).find(".location-long-name").text();
+    // Extract the URL
+    const url =
+      $(element).attr("href")?.replace("/", "https://www.accuweather.com/") ||
+      "";
+
+    // Create an object with the extracted data
+    const location = {
+      name,
+      longName,
+      url,
+      index,
+    };
+
+    // Push the object into the array
+    locations.push(location);
   });
 
-  return texts;
+  return locations;
 }

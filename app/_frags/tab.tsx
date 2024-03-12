@@ -17,7 +17,7 @@ function TabComp() {
           <TabsContent
             value={org.name}
             key={org.name}
-            className="bg-black/20 text-rose-500 px-5 py-6 w-auto sm:text-xl rounded-3xl"
+            className="bg-black/20 text-rose-500 px-5 pb-1 pt-6 w-auto sm:text-xl rounded-[3rem]"
           >
             {org.description}
           </TabsContent>

@@ -11,9 +11,9 @@ function View() {
           <span className="inline-flex translateY translate-y-3 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
