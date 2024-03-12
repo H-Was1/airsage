@@ -181,16 +181,41 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <section className="lg:px-[10rem] px-8 pt-5 pb-2 min-h-[60vh]">
-          <div></div>
+        <section className="lg:px-[10rem] px-8 pt-5 pb-2 min-h-[60vh] relative">
+          <div className="mb-8 flex flex-col gap-6 items-center justify-center">
+            <h1 className="text-rose-500 text-4xl md:text-7xl">
+              Uncover Locations
+            </h1>
+            <p className="text-lg">
+              Discover the air quality and weather conditions of your favorite
+              locations
+            </p>
+          </div>
+          <div className="flex w-[80%] h-full items-center justify-center blur-3xl opacity-10 absolute -z-10">
+            <div className="bg-emerald-500 h-full w-full"></div>
+          </div>
           {cities.length >= 1 ? (
-            <div className="city-grid gap-3">
+            <div className="city-grid gap-3 pb-6 border-b border-emerald-500/20">
               {cities.map((c, i) => (
                 <Link
                   key={i}
                   href={`/${c.name.replace(" ", "-")}`}
-                  className="bg-red-500 rounded-2xl col-span-1 row-span-1"
-                ></Link>
+                  className="bg-zinc-50/10 group hover:bg-zinc-50/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
+                >
+                  <h1 className="text-3xl text-rose-500 font-semibold">{c.name}</h1>
+                  <p className="text-yellow-500">{c.longName}</p>
+                  <div className="flex gap-2 flex-wrap">
+                    <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
+                      Weather
+                    </span>
+                    <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
+                      AQI
+                    </span>
+                    <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
+                      Subscribtion
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           ) : (
