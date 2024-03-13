@@ -1,13 +1,10 @@
 import Hero from "@/app/_frags/hero";
 import Navbar from "./_frags/Navbar";
-import { findCity, scrapeWeather } from "@/lib/scraper";
 import Image from "next/image";
 import TabComp from "./_frags/tab";
 import Footer from "./_frags/footer";
 import View from "./_frags/view";
-import connectToDB from "@/lib/mongoose";
 import { getAllCities } from "@/lib/actions";
-import { url } from "inspector";
 import AccuracyComp from "./_frags/accuracycomp";
 import Link from "next/link";
 
@@ -200,7 +197,7 @@ export default async function Home() {
                 <Link
                   key={i}
                   href={`/${c.name.replace(" ", "-")}`}
-                  className="bg-zinc-50/10 group hover:bg-zinc-50/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
+                  className="bg-zinc-50/10 group hover:bg-emerald-600/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
                 >
                   <h1 className="text-3xl text-rose-500 font-semibold">
                     {c.name}
@@ -214,7 +211,7 @@ export default async function Home() {
                       AQI
                     </span>
                     <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
-                      Subscribtion
+                      Subscription
                     </span>
                   </div>
                 </Link>
