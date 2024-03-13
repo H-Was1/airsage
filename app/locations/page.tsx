@@ -42,7 +42,6 @@ async function Cities() {
                 FILTER
               </p>
               <div></div>
-              <div className=""></div>
             </div>
             <div className="w-full flex flex-col justify-center items-center">
               <div className="w-full flex justify-center border-b border-slate-400/20 pb-2 items-center gap-8">
@@ -88,7 +87,7 @@ async function Cities() {
                       <h1 className="my-6">
                         Did&apos;nt find your location ? Be more specific !
                       </h1>
-                      <div className="transition-all duration-500 overflow-y-scroll custom-scrollbar max-h-[30rem] flex flex-col items-center justify-center gap-3">
+                      <div className="transition-all duration-500 overflow-y-scroll no-scrollbar max-h-[30rem] h-auto flex flex-col items-center gap-3">
                         <div
                           className="bg-black/20 min-h-16 rounded-xl px-3 h-fit flex flex-col items-center justify-center cursor-pointer hover:bg-emerald-600/10 w-[90%]"
                           // onClick={()=>}
