@@ -6,7 +6,8 @@ import Navbar from "../_frags/Navbar";
 import Footer from "../_frags/footer";
 
 export default async function Page({ params }: { params: { name: string } }) {
-  const location: CityProps = await getCity(params.name.replace("-", " "));
+  //@ts-ignore
+  const location: CityProps | null = await getCity(params.name.replace("-", " "));
   return (
     <div className="flex flex-col relative">
       <Navbar />
