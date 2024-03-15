@@ -42,8 +42,6 @@ export const citySchema = new mongoose.Schema(
       wind: { type: String },
       collectionTime: { type: String },
     },
-    // Placeholder for additional fields
-    additionalField1: { type: String },
   },
   { collection: "cities" }
 );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import local from "next/font/local";
 import "./globals.css";
-
+import Toast from "./_frags/toast";
 
 const font = local({ src: "./fonts/Exo2-VariableFont_wght.ttf" });
 
@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={`${font.className} custom-scrollbar bg-black text-zinc-50`}
       >
-        {children}
+        <Toast>{children}</Toast>
       </body>
     </html>
   );

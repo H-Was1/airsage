@@ -26,10 +26,30 @@ async function Navbar() {
           ></Image>
         </Link>
         <li className="text-zinc-50 max-md:hidden flex items-center justify-between gap-8 w-auto">
-          <Link href={"/locations"}>Locations</Link>
-          <Link href={"/weather"}>Weather</Link>
-          <Link href={"/aqi"}>AQI</Link>
-          <Link href={"/subscribe"}>Subscribe</Link>
+          <Link
+            href={"/locations"}
+            className="px-3 py-2 hover:bg-zinc-50/10 hover:-translate-y-1 hover:scale-105 transition-all duration-300 rounded-lg"
+          >
+            Locations
+          </Link>
+          <Link
+            href={"/weather"}
+            className="px-3 py-2 hover:bg-zinc-50/10 hover:-translate-y-1 hover:scale-105 transition-all duration-300 rounded-lg"
+          >
+            Weather
+          </Link>
+          <Link
+            href={"/aqi"}
+            className="px-3 py-2 hover:bg-zinc-50/10 hover:-translate-y-1 hover:scale-105 transition-all duration-300 rounded-lg"
+          >
+            AQI
+          </Link>
+          <Link
+            href={"/subscribe"}
+            className="px-3 py-2 hover:bg-zinc-50/10 hover:-translate-y-1 hover:scale-105 transition-all duration-300 rounded-lg"
+          >
+            Subscribe
+          </Link>
         </li>
         <li className="md:hidden text-zinc-50">
           <Sheet>
