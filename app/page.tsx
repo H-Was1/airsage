@@ -181,7 +181,7 @@ export default async function Home() {
         <section className="lg:px-[10rem] px-8 pt-5 pb-2 min-h-[60vh] relative">
           <div className="mb-8 flex flex-col gap-6 items-center justify-center">
             <h1 className="text-rose-500 text-4xl md:text-7xl">
-              Uncover Locations
+              Premier Metropolises
             </h1>
             <p className="text-lg">
               Discover the air quality and weather conditions of your favorite
@@ -193,29 +193,38 @@ export default async function Home() {
           </div>
           {cities.length >= 1 ? (
             <div className="city-grid gap-3 pb-6 border-b border-emerald-50/20">
-              {cities.map((c, i) => (
-                <Link
-                  key={i}
-                  href={`/${c.name.replace(" ", "-")}`}
-                  className="bg-zinc-50/10 group hover:bg-emerald-600/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
-                >
-                  <h1 className="text-3xl text-rose-500 font-semibold">
-                    {c.name}
-                  </h1>
-                  <p className="text-yellow-500">{c.longName}</p>
-                  <div className="flex gap-2 items-center justify-center flex-wrap">
-                    <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
-                      Weather
-                    </span>
-                    <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
-                      AQI
-                    </span>
-                    <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
-                      Subscription
-                    </span>
-                  </div>
-                </Link>
-              ))}
+              {cities.map(
+                (c, i) =>
+                  i < 8 && (
+                    <Link
+                      key={i}
+                      href={`/${c.name.replace(" ", "-")}`}
+                      className="bg-zinc-50/10 group hover:bg-emerald-600/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
+                    >
+                      <h1 className="text-3xl text-rose-500 font-semibold">
+                        {c.name}
+                      </h1>
+                      <p className="text-yellow-500">{c.longName}</p>
+                      <div className="flex gap-2 items-center justify-center flex-wrap">
+                        <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
+                          Weather
+                        </span>
+                        <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
+                          AQI
+                        </span>
+                        <span className="bg-black/30 py-1 rounded-lg px-1.5 group-hover:bg-emerald-400/60 group-hover:text-black">
+                          Subscription
+                        </span>
+                      </div>
+                    </Link>
+                  )
+              )}
+              <Link
+                href={"/locations"}
+                className="bg-zinc-50/10 hover:bg-emerald-600/20 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex items-center justify-center text-xl sm:text-4xl py-2 px-3"
+              >
+                <h1>Find more Locations...</h1>
+              </Link>
             </div>
           ) : (
             <div className="w-full h-[40vh] flex flex-col gap-3 items-center justify-center">

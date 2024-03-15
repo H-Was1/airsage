@@ -77,6 +77,7 @@ export const scrapeWeather = async (url: string) => {
   }
 };
 export const findCity = async (query: string) => {
+  "use client";
   await puppeteer.use(Adblocker({ blockTrackers: true }));
   const browser = await puppeteer.use(StealthPlugin()).launch({
     // headless: false,

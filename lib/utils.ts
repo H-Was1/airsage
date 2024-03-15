@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getAllCities } from "./actions";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -35,9 +36,9 @@ export const organs = [
     description:
       "Beyond the lungs, poor AQI can worsen existing respiratory conditions like asthma and emphysema, leading to more frequent asthma attacks and diminished lung function .",
   },
-  
 ];
 export interface CityProps {
+  _id?: any;
   name: string;
   longName: string;
   weatherUrl: string;

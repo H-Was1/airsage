@@ -5,19 +5,20 @@ import City from "../db/city";
 import connectToDB from "../mongoose";
 import { scrapeWeather } from "../scraper";
 import { CityProps } from "../utils";
+import { revalidatePath } from "next/cache";
 
 // import { generateEmailBody, sendEmail } from "../NodeMailer";
 
 export async function getAllCities() {
   connectToDB();
-  const cities = await City.find({});
+  const cities: CityProps[] = await City.find({});
   return cities;
 }
 
 export async function getCity(name: string) {
   connectToDB();
   try {
-    const city = await City.findOne({ name });
+    const city: CityProps | null = await City.findOne({ name });
     if (city === null) throw new Error("City is unavailable right now");
     return city;
   } catch (error) {
@@ -116,8 +117,9 @@ export async function manageNewLocation({
       weatherUrl: url,
       ...scrapedData,
     };
-    const existing = getCityByUrl(finalData.weatherUrl);
-    if (!existing) return;
+    if (!url) throw new Error("URL not provided");
+    const existing = await City.findOne({ weatherUrl: url });
+    if (existing) throw new Error(`${name} already exists`);
     await addOne(finalData);
   } catch (error) {
     console.error("managing location: " + error);
@@ -128,9 +130,10 @@ export async function manageNewLocation({
 export async function addOne(data: CityProps) {
   try {
     connectToDB();
-    const newCity = await City.create({ ...data });
-    return 1;
+    const newCity = await City.create(data);
+    revalidatePath("/locations");
   } catch (error) {
     console.error("Adding City " + error);
+    throw error;
   }
 }
