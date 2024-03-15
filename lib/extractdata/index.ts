@@ -181,7 +181,7 @@ export async function extractNames(data: string) {
     const longName = $(element).find(".location-long-name").text();
     // Extract the URL
     const url =
-      $(element).attr("href")?.replace("/", "https://www.accuweather.com/") ||
+      $(element).attr("href") ||
       "";
 
     // Create an object with the extracted data

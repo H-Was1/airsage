@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { manageNewLocation } from "@/lib/actions";
 import { findCity } from "@/lib/scraper";
 import { Button } from "@/components/ui/button";
-import { Loader } from "lucide-react";
+import { FileDiff, Loader, Loader2 } from "lucide-react";
 import { CityProps } from "@/lib/utils";
 import { SetStateAction, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -37,6 +37,11 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const [fquery, setFQuery] = useState<string>("");
   const [query, setQuery] = useState<string>("");
+  const [checked, setChecked] = useState({
+    name: false,
+    aqi: false,
+    followers: false,
+  });
   const [results, setResults] = useState<Array<{
     index: number;
     name: string;
@@ -76,6 +81,7 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
     } catch (error: any) {
       toast.error(`Something went wrong: ${error.message}`);
     } finally {
+      setResults([]);
       setIsAdding(false);
     }
   }
@@ -186,21 +192,25 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
                     results.length > 0 &&
                     results.map((result) => (
                       <div
-                        className={`rounded-xl px-3 py-1.5 min-h-fit flex flex-col items-center justify-center cursor-pointer hover:bg-emerald-600/10 w-[90%] border border-yellow-500/40 hover:border-emerald-300/30 ${
-                          isAdding
-                            ? "cursor-not-allowed blur-sm"
-                            : "bg-black/20"
+                        className={`relative rounded-xl px-3 py-1.5 min-h-fit flex flex-col items-center justify-center cursor-pointer hover:bg-emerald-600/10 w-[90%] border border-yellow-500/40 hover:border-emerald-300/30 ${
+                          isAdding ? "cursor-not-allowed" : "bg-black/20"
                         }`}
                         onClick={() => addNew(result)}
                         key={result.longName}
                         title={result.longName}
                       >
-                        <h1 className="text-rose-500 text-2xl">
-                          {result.name}
-                        </h1>
-                        <p className="text-sm text-yellow-500 h-auto">
-                          {result.longName}
-                        </p>
+                        {isAdding ? (
+                          <div className="flex items-center justify-center gap-4"><Loader2 className="animate-spin" /><span>Adding your Desired Location</span></div>
+                        ) : (
+                          <>
+                            <h1 className="text-rose-500 text-2xl">
+                              {result.name}
+                            </h1>
+                            <p className="text-sm text-yellow-500 h-auto">
+                              {result.longName}
+                            </p>
+                          </>
+                        )}
                       </div>
                     ))}
                 </div>

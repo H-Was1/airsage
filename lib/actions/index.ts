@@ -110,16 +110,17 @@ export async function manageNewLocation({
   index: number;
 }) {
   try {
-    const scrapedData = await scrapeWeather(url);
+    if (!url) throw new Error("URL not provided");
+    const extendedUrl = url?.replace("/", "https://www.accuweather.com/");
+    const existing = await City.findOne({ weatherUrl: extendedUrl });
+    if (existing) throw new Error(`${name} already exists`);
+    const scrapedData = await scrapeWeather(extendedUrl);
     const finalData = {
       name,
       longName,
-      weatherUrl: url,
+      weatherUrl: extendedUrl,
       ...scrapedData,
     };
-    if (!url) throw new Error("URL not provided");
-    const existing = await City.findOne({ weatherUrl: url });
-    if (existing) throw new Error(`${name} already exists`);
     await addOne(finalData);
   } catch (error) {
     console.error("managing location: " + error);
