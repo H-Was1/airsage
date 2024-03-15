@@ -192,15 +192,18 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
                     results.length > 0 &&
                     results.map((result) => (
                       <div
-                        className={`relative rounded-xl px-3 py-1.5 min-h-fit flex flex-col items-center justify-center cursor-pointer hover:bg-emerald-600/10 w-[90%] border border-yellow-500/40 hover:border-emerald-300/30 ${
-                          isAdding ? "cursor-not-allowed" : "bg-black/20"
+                        className={`relative rounded-xl px-3 py-1.5 min-h-fit flex flex-col items-center justify-center hover:bg-emerald-600/10 w-[90%] border border-yellow-500/40 hover:border-emerald-300/30 ${
+                          isAdding ? "cursor-not-allowed" : "bg-black/20 cursor-pointer"
                         }`}
                         onClick={() => addNew(result)}
                         key={result.longName}
                         title={result.longName}
                       >
                         {isAdding ? (
-                          <div className="flex items-center justify-center gap-4"><Loader2 className="animate-spin" /><span>Adding your Desired Location</span></div>
+                          <div className="flex items-center justify-center gap-4">
+                            <Loader2 className="animate-spin" />
+                            <span>Adding your Desired Location</span>
+                          </div>
                         ) : (
                           <>
                             <h1 className="text-rose-500 text-2xl">
