@@ -16,13 +16,10 @@ import { Input } from "@/components/ui/input";
 import { manageNewLocation } from "@/lib/actions";
 import { findCity } from "@/lib/scraper";
 import { Button } from "@/components/ui/button";
-import { FileDiff, Loader, Loader2 } from "lucide-react";
+import {  Loader, Loader2 } from "lucide-react";
 import { CityProps } from "@/lib/utils";
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { locations } from "./servercomp";
-
-// import { locationsData } from "@/lib/utils";
 
 interface dataProps {
   index: number;
@@ -147,9 +144,9 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
                   Enter Location&apos;s Name
                 </DialogTitle>
                 <DialogDescription>
-                  <p className="text-yellow-500">
+                  <span className="text-yellow-500">
                     The Name should be accurate.
-                  </p>
+                  </span>
                 </DialogDescription>
               </DialogHeader>
               <div className="flex items-center space-x-2">
@@ -193,10 +190,12 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
                     results.map((result) => (
                       <div
                         className={`relative rounded-xl px-3 py-1.5 min-h-fit flex flex-col items-center justify-center hover:bg-emerald-600/10 w-[90%] border border-yellow-500/40 hover:border-emerald-300/30 ${
-                          isAdding ? "cursor-not-allowed" : "bg-black/20 cursor-pointer"
+                          isAdding
+                            ? "cursor-not-allowed"
+                            : "bg-black/20 cursor-pointer"
                         }`}
                         onClick={() => addNew(result)}
-                        key={result.longName}
+                        key={result.name}
                         title={result.longName}
                       >
                         {isAdding ? (
@@ -225,7 +224,7 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
           <div className="location-grid w-full grid gap-3 py-6">
             {locations.map((location) => (
               <Link
-                key={location.longName}
+                key={location.name}
                 href={`/${location.name.replace(/ /g, "-")}`}
                 className="bg-zinc-50/10 group hover:bg-emerald-600/10 backdrop-blur-md rounded-2xl col-span-1 row-span-1 flex flex-col items-center justify-center gap-5"
               >

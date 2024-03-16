@@ -19,8 +19,8 @@ const args = [
   "--proxy-bypass-list=*",
 ];
 
-import puppeteer from "puppeteer-extra";
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+import puppeteer from "puppeteer-extra";
 import Adblocker from "puppeteer-extra-plugin-adblocker";
 
 const presets = {
@@ -34,8 +34,8 @@ const presets = {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
 };
 export const scrapeWeather = async (url: string) => {
-  await puppeteer.use(Adblocker({ blockTrackers: true }));
-  const browser = await puppeteer.use(StealthPlugin()).launch({
+  // await puppeteer.use(Adblocker({ blockTrackers: true }));
+  const browser = await puppeteer.use(Adblocker({ blockTrackers: true })).launch({
     // headless: false,
     args,
   });
@@ -79,7 +79,7 @@ export const scrapeWeather = async (url: string) => {
 export const findCity = async (query: string) => {
   "use client";
   await puppeteer.use(Adblocker({ blockTrackers: true }));
-  const browser = await puppeteer.use(StealthPlugin()).launch({
+  const browser = await puppeteer.use(Adblocker({ blockTrackers: true })).launch({
     // headless: false,
     args,
   });

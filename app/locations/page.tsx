@@ -4,12 +4,10 @@ import { getAllCities } from "@/lib/actions";
 import Footer from "../_frags/footer";
 import LocationsComp from "../_frags/locationsComp";
 import { CityProps } from "@/lib/utils";
-import console from "console";
 
 async function Cities() {
   const locations: CityProps[] = await getAllCities();
   const data: Omit<CityProps, "_id">[] = locations;
-  console.log(locations);
 
   return (
     <div className="flex flex-col relative">

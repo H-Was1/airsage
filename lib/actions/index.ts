@@ -7,8 +7,6 @@ import { scrapeWeather } from "../scraper";
 import { CityProps } from "../utils";
 import { revalidatePath } from "next/cache";
 
-// import { generateEmailBody, sendEmail } from "../NodeMailer";
-
 export async function getAllCities() {
   connectToDB();
   const cities: CityProps[] = await City.find({});
@@ -21,8 +19,8 @@ export async function getCity(name: string) {
     const city: CityProps | null = await City.findOne({ name });
     if (city === null) throw new Error("City is unavailable right now");
     return city;
-  } catch (error) {
-    console.error(error);
+  } catch (error:any) {
+    console.error(error.message);
   }
 }
 export async function getCityByUrl(url: string) {
@@ -31,8 +29,8 @@ export async function getCityByUrl(url: string) {
     const city = await City.findOne({ weatherUrl: url });
     if (city === null) throw new Error("City is unavailable right now");
     return city;
-  } catch (error) {
-    console.error(error);
+  } catch (error:any) {
+    console.error(error.message);
     return null;
   }
 }
@@ -68,7 +66,7 @@ export async function updateAll() {
 //       }
 //     }
 //     return 1;
-//   } catch (error) {
+//   } catch (error:any) {
 //     console.error("ERROR: sending Emails " + error.message);
 //     return null;
 //   }
@@ -84,7 +82,7 @@ export async function updateAll() {
 //     const data = await generateEmailBody(document, "Welcome");
 //     sendEmail(data, [email]);
 //     return 1;
-//   } catch (error) {
+//   } catch (error:any) {
 //     console.error("ERROR: Adding Email " + error.message);
 //   }
 // }
@@ -94,8 +92,8 @@ export async function unsubscribe(email: string) {
     connectToDB();
     await City.updateMany({}, { $pull: { emails: email } });
     return 1;
-  } catch (error) {
-    console.error("Removing Email " + error);
+  } catch (error:any) {
+    console.error("Removing Email " + error.message);
   }
 }
 export async function manageNewLocation({
@@ -122,8 +120,8 @@ export async function manageNewLocation({
       ...scrapedData,
     };
     await addOne(finalData);
-  } catch (error) {
-    console.error("managing location: " + error);
+  } catch (error:any) {
+    console.error("managing location: " + error.message);
     throw error;
   }
 }
@@ -133,8 +131,8 @@ export async function addOne(data: CityProps) {
     connectToDB();
     const newCity = await City.create(data);
     revalidatePath("/locations");
-  } catch (error) {
-    console.error("Adding City " + error);
+  } catch (error:any) {
+    console.error("Adding City " + error.message);
     throw error;
   }
 }
