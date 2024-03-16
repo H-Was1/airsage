@@ -100,7 +100,7 @@ export const findCity = async (query: string) => {
     Page.on("request", (req: any) => {
       const requestUrl = req.url();
       if (
-        // req.resourceType() == "stylesheet" ||
+        req.resourceType() == "stylesheet" ||
         req.resourceType() == "font" ||
         req.resourceType() == "image"
       ) {
