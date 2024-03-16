@@ -79,3 +79,55 @@ export interface CityProps {
     };
   };
 }
+export const args = [
+  "--incognito",
+  "--aggressive-cache-discard",
+  "--disable-cache",
+  "--disable-application-cache",
+  "--disable-offline-load-stale-cache",
+  "--disable-gpu-shader-disk-cache",
+  "--media-cache-size=0",
+  "--disk-cache-size=0",
+  "--disable-notifications",
+  "--no-sandbox",
+  "--disable-setuid-sandbox",
+  "--ignore-certificate-errors",
+  '--proxy-server="direct://"',
+  "--proxy-bypass-list=*",
+  `--no-sandbox`,
+  `--headless`,
+  `--disable-gpu`,
+  `--disable-dev-shm-usage`,
+];
+export const presets = {
+  viewport: {
+    width: 1920,
+    height: 1080,
+    deviceScaleFactor: 1,
+  },
+  geo: { latitude: 51.1657, longitude: 10.4515 },
+  useragents:
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+};
+//@ts-ignore
+export const interceptor = (req) => {
+  const requestUrl = req.url();
+  if (
+    req.resourceType() == "stylesheet" ||
+    req.resourceType() == "font" ||
+    req.resourceType() == "image"
+  ) {
+    req.abort();
+  } else {
+    req.continue();
+  }
+};
+//@ts-ignore
+
+export const initializer = async (Page) => {
+  await Page.setGeolocation(presets.geo);
+  await Page.setUserAgent(presets.useragents);
+  await Page.setDefaultNavigationTimeout(0);
+  await Page.setRequestInterception(true);
+  Page.on("request", interceptor);
+};
