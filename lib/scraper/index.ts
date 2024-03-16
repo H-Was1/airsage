@@ -17,9 +17,13 @@ const args = [
   "--ignore-certificate-errors",
   '--proxy-server="direct://"',
   "--proxy-bypass-list=*",
+  `--no-sandbox`,
+  `--headless`,
+  `--disable-gpu`,
+  `--disable-dev-shm-usage`,
 ];
 
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 import puppeteer from "puppeteer-extra";
 import Adblocker from "puppeteer-extra-plugin-adblocker";
 
@@ -35,10 +39,12 @@ const presets = {
 };
 export const scrapeWeather = async (url: string) => {
   // await puppeteer.use(Adblocker({ blockTrackers: true }));
-  const browser = await puppeteer.use(Adblocker({ blockTrackers: true })).launch({
-    // headless: false,
-    args,
-  });
+  const browser = await puppeteer
+    .use(Adblocker({ blockTrackers: true }))
+    .launch({
+      // headless: false,
+      args,
+    });
   try {
     const Page = (await browser.pages())[0];
     await Page.setGeolocation(presets.geo);
@@ -77,12 +83,14 @@ export const scrapeWeather = async (url: string) => {
   }
 };
 export const findCity = async (query: string) => {
-  "use client";
+  // "use client";
   await puppeteer.use(Adblocker({ blockTrackers: true }));
-  const browser = await puppeteer.use(Adblocker({ blockTrackers: true })).launch({
-    // headless: false,
-    args,
-  });
+  const browser = await puppeteer
+    .use(Adblocker({ blockTrackers: true }))
+    .launch({
+      // headless: false,
+      args,
+    });
   try {
     const Page = (await browser.pages())[0];
     await Page.setGeolocation(presets.geo);
