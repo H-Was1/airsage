@@ -125,9 +125,9 @@ export const interceptor = (req) => {
 //@ts-ignore
 
 export const initializer = async (Page) => {
-  await Page.setGeolocation(presets.geo);
-  await Page.setUserAgent(presets.useragents);
-  await Page.setDefaultNavigationTimeout(0);
+  // await Page.setGeolocation(presets.geo);
+  // await Page.setUserAgent(presets.useragents);
+  // await Page.setDefaultNavigationTimeout(0);
   await Page.setRequestInterception(true);
   Page.on("request", interceptor);
 };

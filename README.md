@@ -1,24 +1,36 @@
-# AirSage
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-AirSage is a modern, appealing website designed to provide users with AQI data and weather updates. It features a glass-morphism design with gradients, offering a modern look that is both visually appealing and functional.
+## Getting Started
 
-## Features
+First, run the development server:
 
-- **Data Acquisition**: Easily acquire and manage data.
-- **Weather Data**: Access up-to-date weather information.
-- **Email Updates**: Receive twice-daily and once-daily email updates.
-- **Glassmorphism Design**: A modern design with gradients for an appealing look.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Installation
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1. Clone the repository: `git clone https://github.com/H-Was1/airsage.git`
-2. Navigate to the project directory: `cd airsage`
-3. Install dependencies: `npm install`
-4. Start the server: `npm run dev`
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Usage
+## Learn More
 
-1. Visit [AirSage](https://air-sage.vercel.app).
-2. Explore the data and weather updates.
-3. Manage your email update preferences.
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

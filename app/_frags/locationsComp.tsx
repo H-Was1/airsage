@@ -16,9 +16,9 @@ import { Input } from "@/components/ui/input";
 import { manageNewLocation } from "@/lib/actions";
 import { findCity } from "@/lib/scraper";
 import { Button } from "@/components/ui/button";
-import {  Loader, Loader2 } from "lucide-react";
+import { Loader, Loader2 } from "lucide-react";
 import { CityProps } from "@/lib/utils";
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
 interface dataProps {
@@ -52,12 +52,12 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
       setResults([]);
       if (query.length < 3) throw new Error("Plz enter a location name");
       const result = await findCity(query);
-      if (result && result.length < 1) throw new Error("Could not find city");
-      // Check if result is not undefined or null before calling setResults
-      if (result) {
-        //@ts-ignore
-        setResults(result);
-      }
+      // if (result && result.length < 1) throw new Error("Could not find city");
+      // // Check if result is not undefined or null before calling setResults
+      // if (result) {
+      //   //@ts-ignore
+      //   setResults(result);
+      // }
     } catch (error) {
       console.error("Searching City: " + error);
       return null;
@@ -65,22 +65,22 @@ function LocationsComp({ data }: { data: Array<Omit<CityProps, "_id">> }) {
       setIsLoading(false);
     }
   }
-  async function addNew(result: {
+  function addNew(result: {
     index: number;
     name: string;
     longName: string;
     url: string;
   }) {
-    try {
-      setIsAdding(true);
-      const handler = await manageNewLocation(result);
-      toast.success(`${result.name} has been added successfully`);
-    } catch (error: any) {
-      toast.error(`Something went wrong: ${error.message}`);
-    } finally {
-      setResults([]);
-      setIsAdding(false);
-    }
+    // try {
+    //   setIsAdding(true);
+    //   const handler = await manageNewLocation(result);
+    //   toast.success(`${result.name} has been added successfully`);
+    // } catch (error: any) {
+    //   toast.error(`Something went wrong: ${error.message}`);
+    // } finally {
+    //   setResults([]);
+    //   setIsAdding(false);
+    // }
   }
   const dataRef = useRef(data);
   useEffect(() => {
